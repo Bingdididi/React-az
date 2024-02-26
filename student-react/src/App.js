@@ -6,6 +6,8 @@ import StudentListPage from "./pages/StudentListPage";
 import StudentDetailPage from "./pages/StudentDetailPage";
 import NavBar from './components/NavBar';
 import NotFoundPage from './pages/NotFoundPage';
+import React from 'react';
+
 
 
 function App() {

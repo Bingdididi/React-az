@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams
 import CONSTANTS from '../data/config';
 
-const EditStudentForm = ({ params }) => {
+const EditStudentForm = ({ onSave }) => {
   const { id } = useParams(); // Use useParams to get the id
   const [formData, setFormData] = useState({
     id: '',
@@ -44,7 +44,7 @@ const EditStudentForm = ({ params }) => {
     });
 
     if (response.ok) {
-      params.onSave(formData);  // Pass back the updated data
+     onSave(formData);  // Pass back the updated data
     } else {
       console.error('Failed to update student');
     }

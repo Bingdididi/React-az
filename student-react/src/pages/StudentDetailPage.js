@@ -43,10 +43,12 @@ const StudentDetailPage = () => {
         console.error('Failed to update student - Status:', response.status, 'Body:', errorBody);
         throw new Error(`API responded with status ${response.status}`);
       }
-  
-      const updatedInfo = await response.json(); // Assuming the server returns the updated student object
+      // Check if the response has content before parsing it as JSON
+      const text = await response.text();
+      const updatedInfo = text ? JSON.parse(text) : {};
       setStudentInfo(updatedInfo); // Update local state with the latest server state
       setEditMode(false); // Exit edit mode with updated information displayed
+      navigate('/list');  // Navigate to the updated student's detail page (optional, but useful for UX)
     } catch (error) {
       console.error('Failed to update student', error);
       // Implement UI feedback for errors (e.g., error message display)
@@ -82,10 +84,10 @@ const StudentDetailPage = () => {
         </div>
       ) : (
         <div>
-          <p style={{ width: "20%", float: "right" }}>
+          <div style={{ width: "20%", float: "right" }}>
             <h3>Others:</h3>
             <StudentList exceptId={studentInfo.studentId} />
-          </p>
+          </div>
 
           <h4 className="text-danger">Student ID={studentInfo.studentId}</h4>
           <p>
